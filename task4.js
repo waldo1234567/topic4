@@ -40,7 +40,7 @@ for (let i = 0; i < kata.length; i++) {
         jwb[kata[i]] += 1;
     }
 }
-console.log(jwb);
+// console.log(jwb);
 
 /**
  * Grup Orang Berdasarkan Usia
@@ -69,16 +69,16 @@ for (let i = 0; i < people.length; i++) {
 // console.log(umurDewi);
 // OUTPUT: 32
 
-let collectionUmur;
+let collectionUmur = {};
 
-// for(let i = 0; i < people.length; i++){
-//     if(people[i].usia < people[i+1].usia){
-//         collectionUmur = people[i].usia;
-//         people[i].usia = people[i+1].usia;
-//         people[i+1].usia = collectionUmur;
-//     }
-// }
-// console.log(collectionUmur);
+people.forEach(orang=>{
+    if(!collectionUmur[orang.usia]){
+        collectionUmur[orang.usia] = [];
+    }
+    collectionUmur[orang.usia].push(orang);
+});
+console.log(collectionUmur);
+
 
 // OUTPUT:
 // {
@@ -101,9 +101,105 @@ const kota = {
     Medan: 4
 };
 
+let arrBaru = [];
+
 const arr = [];
 for (let key in kota) {
-    arr.push(kota[key]);
+    arrBaru.push(key,kota[key]);
 }
 
-// console.log(arr);
+console.log(arrBaru);
+
+/**
+ * Mengakses Properti Bertingkat
+ * 
+ * Diberikan sebuah objek bertingkat. Akses value dar key city
+ */
+
+const data = {
+    user: {
+        profile: {
+            name: "John Doe",
+            address: {
+                city: "Jakarta",
+                postalCode: "12345"
+            }
+        }
+    }
+};
+
+let result // "Jakarta"
+
+result = data.user.profile.address.city;
+
+console.log(result);
+
+/**
+ * Penghitungan Suara Pemilihan
+ * 
+ * Terdapat sebuah array berisi suara pemilihan. Hitunglah total suara untuk masing-masing kandidat dan kembalikan dalam bentuk objek.
+ */
+
+const suara = ['Budi', 'Ana', 'Budi', 'Citra', 'Ana', 'Budi', 'Dewi', 'Dewi', 'Ana'];
+// OUTPUT :
+// { Budi: 3, Ana: 3, Citra: 1, Dewi: 2 }
+
+let objSuara = {}
+
+suara.forEach(nama => {
+    if(!objSuara[nama]){
+        objSuara[nama] = 1;
+    }else{
+        objSuara[nama] += 1;
+    }
+})
+// console.log(objSuara);
+
+/**
+ * Menggabungkan Beberapa Objek
+ * 
+ * Terdapat beberapa objek dengan struktur yang sama. 
+ * Gabungkan objek-objek tersebut sehingga setiap kunci memiliki nilai yang merupakan total dari ketiga objek tersebut.
+ */
+
+const obj1 = { a: 5, b: 7, c: 3 };
+const obj2 = { a: 4, b: 1, c: 8 };
+const obj3 = { a: 9, b: 2, c: 5 };
+
+let objTotal = {};
+
+for(let key in obj1){
+    objTotal[key] = 0;
+
+    objTotal[key] += obj1[key];
+    objTotal[key] += obj2[key];
+    objTotal[key] += obj3[key];
+}
+
+console.log(objTotal);
+
+
+/**
+ * Mencari Nilai Tertinggi dan tampilkan nama dan nilainya
+ * 
+ * Gunakan looping untuk mencarinya. Lalu resultnya menjadi string dengan pernyataan
+ */
+
+const mahasiswa = [
+    { nama: "Budi", nilai: 85 },
+    { nama: "Ana", nilai: 90 },
+    { nama: "Dono", nilai: 78 },
+    { nama: "Dewi", nilai: 92 }
+];
+
+let newList = {}
+
+mahasiswa.forEach(orang => {
+    if(Math.max(orang.nilai)){
+       newList =  Object.assign({}, orang);
+    }
+})
+console.log(newList);
+console.log(`Murid yang memiliki nilai tertinggi adalah ${newList['nama']} dengan nilai ${newList['nilai']}`);
+
+
