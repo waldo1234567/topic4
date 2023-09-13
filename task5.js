@@ -111,20 +111,22 @@ function iterasiArrayDenganCallback(arr, callback){
  * 
  */
 
+
+
 function belanja(saldo, harga, callback) {
     for(let i = 0; i < harga.length; i++){
-        if(harga[i] < saldo){
-            let result1 = saldo - harga[i];
-            callback(result1);
-        }else if (harga[i] > saldo){
+        if(harga[i] <= saldo){
+            saldo -= harga;
+            callback(saldo);
+        }else if (harga[i] >= saldo){
             console.log("Uang tidak cukup!");
         }
     }
 }
 
-// belanja(100000, [50000,20000,10000,5000], (cur)=>{
-//     console.log(cur);
-// })
+belanja(100000, [50000,20000,10000,5000], (cur)=>{
+    console.log(cur);
+})
 
 
 //Output:
@@ -163,6 +165,6 @@ function urutkanArray(arr, compareFunc, callback){
 
 
 
-urutkanArray([3, 1, 4, 1], (a, b) => a - b, (hasil) => {
-    console.log(hasil); // [1, 1, 3, 4]
-});
+// urutkanArray([3, 1, 4, 1], (a, b) => a - b, (hasil) => {
+//     console.log(hasil); // [1, 1, 3, 4]
+// });
